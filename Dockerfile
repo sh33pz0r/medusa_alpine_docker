@@ -9,6 +9,7 @@ RUN apk add --no-cache python \
                         py2-pip \
                         git \
                         mediainfo \
+                        unrar \
                         py-gdbm && \
                         git clone -b ${medusa_ver} --depth 1 https://github.com/pymedusa/Medusa /app/medusa && \
                         rm -rf /var/cache/apk/* ~/.pip/cache/* /root/.cache
