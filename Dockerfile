@@ -15,11 +15,14 @@ RUN apk add --no-cache python \
                         rm -rf /var/cache/apk/* ~/.pip/cache/* /root/.cache
 
 COPY entrypoint.sh /entrypoint.sh
+COPY pycheck.py /pycheck.py
 
 EXPOSE 8081
 
 VOLUME [ "/config" ]
 
 ENTRYPOINT ["/entrypoint.sh"]
+
+HEALTHCHECK --interval=15s --timeout=5s --start-period=10s --retries=3 CMD [ "/usr/bin/python", "/pycheck.py" ]
 
 CMD /usr/bin/python /app/medusa/start.py --nolaunch --datadir /config
