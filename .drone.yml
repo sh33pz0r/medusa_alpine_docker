@@ -1,0 +1,22 @@
+---
+kind: pipeline
+name: default
+
+steps:
+- name: build
+  image: plugins/docker
+  settings:
+    repo: ${DOCKER_REPO}
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
+
+  when:
+    branch:
+    - master
+    event:
+    - push
+    - pull-request
+    
+trigger:
+  branch:
+  - master
